@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div class="container">
+    <ul class="wheel">
+      <li style="--index:1">1</li>
+      <li style="--index:2">2</li>
+      <li style="--index:3">3</li>
+      <li style="--index:4">4</li>
+      <li style="--index:5">5</li>
+      <li style="--index:6">6</li>
+      <li style="--index:7">7</li>
+      <li style="--index:8">8</li>
+      <li style="--index:9">9</li>
+      <li style="--index:10">10</li>
+    </ul>
+    <div class="pin"></div>
+  </div>
+  <button class="spin">SPIN</button>
+  <script>
+    const wheel = document.querySelector('.wheel');
+    const spinBtn = document.querySelector('.spin');
+
+    let deg = 0;
+    let selectedNum = 0;
+
+    spinBtn.addEventListener('click', () => {
+      spinBtn.style.pointerEvents = 'none';
+      const angle = Math.ceil(Math.random() * 10)
+      deg = Math.floor(angle * 36 + Math.random() * 18);
+      wheel.style.transition = 'all 2s ease-in-out';
+      wheel.style.transform = `rotate(${360 * 5 + deg}deg)`;
+      selectedNum = 10 - angle || 10
+      console.log('gpt.js:15>>', selectedNum)
+      wheel.addEventListener('transitionend', () => {
+        wheel.style.transition = 'none';
+        wheel.style.transform = `rotate(${deg}deg)`;
+        spinBtn.style.pointerEvents = 'auto';
+      });
+
+    });
+  </script>
+</body>
+
+</html>
